@@ -1,0 +1,101 @@
+.site-height {
+    height: 844px;
+}
+
+.site-height-chats {
+    height: 1100px;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#message-box:focus-visible {
+  outline: 0;
+}
+
+#message {
+  padding-top: 0.7em;
+}
+
+#messageDiv {
+  color: black;
+  background-color: white;
+  padding: 0.5em 1.5em;
+  margin: 0.3em;
+  width: fit-content;
+  border-radius: 10px;
+  position: relative;
+  max-width: 50em;
+}
+
+#userInMessage {
+  font-size: 13px;
+  position: absolute;
+  top: 5px;
+  left: 8px;
+}
+
+#chats {
+  max-height: 1000px;
+}
+
+#titleOfAppPhone {
+    display: none;
+  }
+
+#chats::-webkit-scrollbar {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  #room-name {
+    display: none;
+  }
+
+  #titleOfApp {
+    display: none;
+  }
+
+  #titleOfAppPhone {
+    display: block;
+  }
+}
