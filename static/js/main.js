@@ -26,7 +26,6 @@ function getRoom(roomId) {
     if (currentRoom !== roomId) {
         clearTimeout(refresher)
     }
-    console.log(userArr)
     currentRoom = roomId;
     fetch(`/room/${roomId}`)
         .then((response) => response.json())
@@ -42,8 +41,6 @@ function getRoom(roomId) {
                 })
             })
             JSON.parse(data.data).forEach(e => {
-                console.log(userArr[counter])
-
                 let messageDiv = document.createElement("div")
                 let element = document.createElement("p");
                 let userInMessage = document.createElement("p")
@@ -71,10 +68,12 @@ function getRoom(roomId) {
 let userArr = []
 let messageArr = []
 let refresher;
-let refreshTime = 1000;
+let refreshTime = 400;
 
 function refresherFun() {
     refresher = setTimeout(() => {
+        let objDiv = document.getElementById("chats");
+        objDiv.scrollTop = objDiv.scrollHeight;
         getRoom(currentRoom)
     }, refreshTime)
 }
