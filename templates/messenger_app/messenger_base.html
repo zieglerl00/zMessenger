@@ -6,35 +6,34 @@
         <div id="rooms" class=" site-height-chats w-2/12 flex flex-col text-slate-100 shadow-lg h-screen">
 
             <div class="flex justify-center my-4">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-slate-900 w-6 h-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-slate-700 w-6 h-6">
                     <path d="M511.1 63.1v287.1c0 35.25-28.75 63.1-64 63.1h-144l-124.9 93.68c-7.875 5.75-19.12 .0497-19.12-9.7v-83.98h-96c-35.25 0-64-28.75-64-63.1V63.1c0-35.25 28.75-63.1 64-63.1h384C483.2 0 511.1 28.75 511.1 63.1z"/>
                 </svg>
-                <p class="text-neutral-900 font-bold ml-2" id="titleOfApp">zMessenger</p>
+                <p class="text-slate-700 font-bold ml-2" id="titleOfApp">zMessenger</p>
             </div>
 
             <div class="flex justify-center my-8">
-                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <svg class="w-8 h-8 fill-slate-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/>
                 </svg>
                 {% if user.is_authenticated %}
-                    <p class="text-neutral-900 uppercase m-2">{{ user }}</p>
+                    <p class="text-slate-700 uppercase m-2">{{ user }}</p>
                 {% else %}
-                    <p class="text-neutral-900 uppercase m-2 text-sm md:text-md">Not logged in</p>
+                    <p class="text-slate-700 uppercase m-2 text-sm md:text-md">Not logged in</p>
                 {% endif %}
             </div>
             <hr>
 
             {% for room in rooms %}
-                <div onclick="getRoom({{ room.pk }})"
-                     class="w-full text-neutral-900 h-16 flex justify-center items-center hover:bg-slate-400/40 ease-in-out duration-150 rounded-lg {% if forloop.first %} mt-4 {% endif %} {% if user.is_authenticated %} cursor-pointer {% else %} disabled {% endif %}">
+                <div id="room{{ room.pk }}" onclick="getRoom({{ room.pk }})" class="text-color w-full h-16 flex justify-center items-center hover:bg-slate-400/40 ease-in-out duration-150 {% if forloop.first %} mt-4 {% endif %} {% if user.is_authenticated %} cursor-pointer {% else %} disabled {% endif %}">
                     <i class="{{ room.icon }}"></i>
                     <p id="room-name">{{ room.name }}</p>
                 </div>
             {% endfor %}
             {% if user.is_superuser %}
-                <div class="flex justify-center">
+                <div class="flex justify-center mt-8">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                         class="h-10 w-10 fill-slate-900 hover:fill-slate-300 cursor-pointer duration-150 ease-in-out"
+                         class="h-10 w-10 fill-slate-700 hover:fill-slate-300 cursor-pointer duration-150 ease-in-out"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" data-bs-toggle="modal"
                          data-bs-target="#exampleModalCenter">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -46,7 +45,7 @@
                 {% if user.is_authenticated %}
                     <div class="m-4">
                         <a href="{% url 'users:logout' %}"
-                           class="inline-block px-2 md:px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
+                           class="inline-block px-2 md:px-6 py-2.5 bg-violet-300 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-violet-700 hover:shadow-lg focus:bg-violet-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-violet-800 active:shadow-lg transition duration-150 ease-in-out">
                             <div class="flex justify-evenly items-center">
                                 <p class="hidden md:block">Logout</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:ml-1" fill="none"
@@ -60,7 +59,7 @@
                 {% else %}
                     <div class="m-4">
                         <a href="{% url 'users:signin' %}"
-                           class="inline-block px-2 md:px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">
+                           class="inline-block px-2 md:px-6 py-2.5 bg-violet-500 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-violet-600 hover:shadow-lg focus:bg-violet-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-violet-700 active:shadow-lg transition duration-150 ease-in-out">
                             <div class="flex justify-evenly items-center">
                                 <p class="hidden md:block">Login</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:ml-1" fill="none"
@@ -89,7 +88,7 @@
                                class="w-full shadow-lg mt-2 font-xl px-4 py-4 rounded-lg relative  {% if user.is_authenticated %} {% else %} disabled {% endif %}">
                         <button class="absolute right-5 top-6  {% if user.is_authenticated %} {% else %} disabled {% endif %}"
                                 id="send-btn">
-                            <svg class="w-6 h-6 hover:fill-slate-300 ease-in-out duration-150"
+                            <svg class="w-6 h-6 hover:fill-violet-400 fill-violet-500 ease-in-out duration-150"
                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/>
                             </svg>

@@ -1,3 +1,7 @@
+body {
+  /*background: linear-gradient(to right top, #65dfc9, #6cdbeb);*/
+}
+
 .site-height {
     height: 844px;
 }
@@ -59,7 +63,7 @@
 #messageDiv {
   background-color: rgba(238, 238, 238, 0.4);
   padding: 0.5em 1.5em;
-  margin: 0.3em;
+  margin: 0.6em 0.6em 1em;
   width: fit-content;
   border-radius: 10px;
   position: relative;
@@ -75,6 +79,7 @@
 
 #chats {
   height: 75vh;
+  background: white;
 }
 
 #titleOfAppPhone {
@@ -138,4 +143,13 @@
 .disabled {
    pointer-events: none;
    cursor: default;
+}
+
+.active-room {
+  background-color: #a78bfa;
+  color: white !important;
+}
+
+.text-color {
+  color: #334155;
 }

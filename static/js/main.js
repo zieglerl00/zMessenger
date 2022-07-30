@@ -20,17 +20,17 @@ function getCSRFToken() {
 // ---------------------------------------------------------------------------------------------------------------------
 
 const chatBox = document.getElementById("chats");
-let currentRoom;
+let currentRoom = "";
 let firstLoadMessages = true;
 let oldMessagesArr = [];
 const userColorArr = ["user-color1", "user-color2", "user-color3", "user-color4", "user-color5", "user-color6", "user-color7", "user-color8", "user-color9"]
+let oldRoomId = "";
 
 function getRoom(roomId) {
 
     let chatBoxWithMessages = document.getElementById("chats")
     let childMessages = chatBoxWithMessages.childNodes
-    console.log(childMessages.length)
-
+    document.getElementById(`room${roomId}`).classList.add("active-room")
     if (oldMessagesArr.length !== childMessages.length) {
         console.log("odd")
         let objDiv = document.getElementById("chats");
@@ -38,6 +38,11 @@ function getRoom(roomId) {
     }
 
     if (currentRoom !== roomId) {
+        if (oldRoomId.length !== 0) {
+            document.getElementById(`room${roomId}`).classList.add("active-room")
+            document.getElementById(`room${oldRoomId}`).classList.remove("active-room")
+        }
+        oldRoomId = roomId
         clearTimeout(refresher)
         firstLoadMessages = true;
     }
