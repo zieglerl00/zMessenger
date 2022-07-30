@@ -8,7 +8,7 @@ from .models import *
 
 # Create your views here.
 
-@login_required
+
 def index_messenger(request):
     rooms = Room.objects.all().order_by('pk')
     return render(request, 'messenger_app/messenger_base.html', {

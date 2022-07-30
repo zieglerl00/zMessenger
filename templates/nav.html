@@ -7,6 +7,17 @@
     </div>
     <div class="w-10/12">
         <p class="text-white font-bold ml-2" id="titleOfAppPhone">zMessenger</p>
-        <p class="text-white">{{ user }}</p>
+        {% if user.is_authenticated %}
+            <div class="flex justify-between mx-4">
+                <p class="text-white uppercase">{{ user }}</p>
+                <a href="{% url 'users:logout' %}" class="text-white">
+                    Logout
+                </a>
+            </div>
+        {% else %}
+            <a href="{% url 'users:signin' %}" class="text-white flex float-right mx-4">
+                Login
+            </a>
+        {% endif %}
     </div>
 </div>
