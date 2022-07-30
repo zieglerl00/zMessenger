@@ -21,19 +21,34 @@ function getCSRFToken() {
 
 const chatBox = document.getElementById("chats");
 let currentRoom;
+let firstLoadMessages = true;
+let oldMessagesArr = [];
 
 function getRoom(roomId) {
+
+    let chatBoxWithMessages = document.getElementById("chats")
+    let childMessages = chatBoxWithMessages.childNodes
+    console.log(childMessages.length)
+
+    if (oldMessagesArr.length !== childMessages.length) {
+        console.log("odd")
+        let objDiv = document.getElementById("chats");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
     if (currentRoom !== roomId) {
         clearTimeout(refresher)
+        firstLoadMessages = true;
     }
     currentRoom = roomId;
     fetch(`/room/${roomId}`)
         .then((response) => response.json())
         .then((data) => {
             userArr = []
-            messageArr = []
             chatBox.innerHTML = "";
-            let counter  = 0;
+            let counter = 0;
+            oldMessagesArr = messageArr
+            messageArr = []
             JSON.parse(data.users).forEach(e => {
                 userArr.push({
                     "username": e.fields.username,
@@ -57,10 +72,17 @@ function getRoom(roomId) {
                 element.innerText = e.fields.message;
 
                 messageArr.push(e.fields.message)
+
                 counter += 1
             })
+
         })
         .then((data) => {
+            // if (firstLoadMessages) {
+            //     let objDiv = document.getElementById("chats");
+            //     objDiv.scrollTop = objDiv.scrollHeight;
+            //     firstLoadMessages = false;
+            // }
             refresherFun()
         })
 }
@@ -68,12 +90,10 @@ function getRoom(roomId) {
 let userArr = []
 let messageArr = []
 let refresher;
-let refreshTime = 400;
+let refreshTime = 1000;
 
 function refresherFun() {
     refresher = setTimeout(() => {
-        let objDiv = document.getElementById("chats");
-        objDiv.scrollTop = objDiv.scrollHeight;
         getRoom(currentRoom)
     }, refreshTime)
 }
@@ -84,6 +104,9 @@ function refresherFun() {
 function sendMessage() {
     let csrf_cookieValue = getCSRFToken();
     let message = document.getElementById("message-box").value
+    if (message.length === 0) {
+        return
+    }
     fetch(`/send-message/${currentRoom}`, {
         method: 'POST',
         headers: {
@@ -97,13 +120,12 @@ function sendMessage() {
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+            const messageDelete = document.getElementById("message-box")
+            messageDelete.value = "";
         })
         .catch((error) => {
             console.error('Error:', error);
+            const messageDelete = document.getElementById("message-box")
+            messageDelete.value = "";
         });
 }
-
-const textarea = document.getElementById("message-box");
-textarea.addEventListener("keyup", (event) => {
-    console.log(event.key)
-})

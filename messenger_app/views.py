@@ -19,9 +19,16 @@ def index_messenger(request):
 def change_room(request, pk):
     room_messages = Message.objects.filter(room__id=pk)
     users = User.objects.filter(message__room_id=pk)
-    print(users)
+
+    # messages_reversed = reversed(room_messages)
+    # users_reversed = reversed(users)
+
     room_messages = serializers.serialize('json', room_messages)
     users = serializers.serialize('json', users)
+
+    # print(messages_reversed)
+    # print(users_reversed)
+
     return JsonResponse({
         "data": room_messages,
         "users": users
