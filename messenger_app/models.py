@@ -8,6 +8,7 @@ from django.db import models
 
 class Room(models.Model):
     name = models.CharField(max_length=255)
+    icon = models.CharField(max_length=255, default="fa-solid fa-comments mr-2", blank=True)
 
 
 class Message(models.Model):

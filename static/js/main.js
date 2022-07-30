@@ -23,6 +23,7 @@ const chatBox = document.getElementById("chats");
 let currentRoom;
 let firstLoadMessages = true;
 let oldMessagesArr = [];
+const userColorArr = ["user-color1", "user-color2", "user-color3", "user-color4", "user-color5", "user-color6", "user-color7", "user-color8", "user-color9"]
 
 function getRoom(roomId) {
 
@@ -60,10 +61,14 @@ function getRoom(roomId) {
                 let element = document.createElement("p");
                 let userInMessage = document.createElement("p")
 
+                userInMessage.classList.add("user-color4")
+                userInMessage.classList.add("font-bold")
+
                 messageDiv.setAttribute("id", "messageDiv")
                 chatBox.append(messageDiv);
                 messageDiv.append(userInMessage)
                 messageDiv.append(element)
+                messageDiv.classList.add("shadow-lg")
 
                 userInMessage.setAttribute("id", "userInMessage")
                 userInMessage.innerText = userArr[counter].username
@@ -78,11 +83,6 @@ function getRoom(roomId) {
 
         })
         .then((data) => {
-            // if (firstLoadMessages) {
-            //     let objDiv = document.getElementById("chats");
-            //     objDiv.scrollTop = objDiv.scrollHeight;
-            //     firstLoadMessages = false;
-            // }
             refresherFun()
         })
 }
@@ -90,7 +90,7 @@ function getRoom(roomId) {
 let userArr = []
 let messageArr = []
 let refresher;
-let refreshTime = 1000;
+let refreshTime = 800;
 
 function refresherFun() {
     refresher = setTimeout(() => {

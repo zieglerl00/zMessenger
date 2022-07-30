@@ -44,3 +44,20 @@ def send_message(request, pk):
     new_message.save()
 
     return JsonResponse({"data": "data"})
+
+
+def create_room(request):
+    rooms = Room.objects.all().order_by('pk')
+    if request.method == "POST":
+        room_name = request.POST.get("room-name")
+        icon_class = request.POST.get("icon-class")
+        print(room_name, icon_class)
+        new_room = Room(name=room_name, icon=icon_class)
+        new_room.save()
+        return render(request, 'messenger_app/messenger_base.html', {
+            "rooms": rooms
+        })
+    else:
+        return render(request, 'messenger_app/messenger_base.html', {
+            "rooms": rooms
+        })

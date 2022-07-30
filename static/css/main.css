@@ -57,8 +57,7 @@
 }
 
 #messageDiv {
-  color: black;
-  background-color: white;
+  background-color: rgba(238, 238, 238, 0.4);
   padding: 0.5em 1.5em;
   margin: 0.3em;
   width: fit-content;
@@ -75,7 +74,7 @@
 }
 
 #chats {
-  max-height: 85vh;
+  height: 75vh;
 }
 
 #titleOfAppPhone {
@@ -98,4 +97,45 @@
   #titleOfAppPhone {
     display: block;
   }
+}
+
+.user-color1 {
+  color: coral;
+}
+
+.user-color2 {
+  color: #f9ff50;
+}
+
+.user-color3 {
+  color: #50ffc2;
+}
+
+.user-color4 {
+  color: #9f50ff;
+}
+
+.user-color5 {
+  color: #a5ff50;
+}
+
+.user-color6 {
+  color: #ff5050;
+}
+
+.user-color7 {
+  color: #ff50e8;
+}
+
+.user-color8 {
+  color: #7c50ff;
+}
+
+.user-color9 {
+  color: #50ffeb;
+}
+
+.disabled {
+   pointer-events: none;
+   cursor: default;
 }
