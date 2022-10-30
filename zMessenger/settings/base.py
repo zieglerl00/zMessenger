@@ -30,7 +30,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'compressor',
     'messenger_app',
+    'rest_framework',
     'users',
+    'api',
 ]
 
 MIDDLEWARE = [
