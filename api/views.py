@@ -21,5 +21,7 @@ def add_shopping_item(request):
 
 
 @api_view(["DELETE"])
-def remove_shopping_item(request):
+def remove_shopping_item(request, pk):
+    item = ShoppingItem.objects.get(pk=pk)
+    item.delete()
     return Response(request.data)
