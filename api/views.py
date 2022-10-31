@@ -18,3 +18,8 @@ def add_shopping_item(request):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
+
+
+@api_view(["DELETE"])
+def remove_shopping_item(request):
+    return Response(request.data)
